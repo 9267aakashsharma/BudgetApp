@@ -1,0 +1,24 @@
+{
+  "name": "budgetapp",
+  "version": "1.0.0",
+  "description": "Budget app",
+  "main": "appController.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel index.html",
+    "build": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/9267aakashsharma/BudgetApp.git"
+  },
+  "author": "Aakash",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/9267aakashsharma/BudgetApp/issues"
+  },
+  "homepage": "https://github.com/9267aakashsharma/BudgetApp#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}
