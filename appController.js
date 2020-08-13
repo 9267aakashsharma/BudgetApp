@@ -9,9 +9,7 @@ function setUpEventListners() {
     }
   });
   document.querySelector(DOM.inputButton).addEventListener("click", addItem);
-  document
-    .querySelector(DOM.itemDeleteButton)
-    .addEventListener("click", delItem);
+  document.querySelector(DOM.container).addEventListener("click", delItem);
 }
 
 function updateBudget() {
@@ -40,8 +38,13 @@ function addItem() {
   }
 }
 
-function delItem() {
-  updateBudget();
+function delItem(event) {
+  const itemID = event.target.parentNode.parentNode.parentNode.parentNode.id;
+  if (itemID) {
+    budgetController.delItem(itemID);
+    uiController.deleteListItem(itemID);
+    updateBudget();
+  }
 }
 
 function init() {

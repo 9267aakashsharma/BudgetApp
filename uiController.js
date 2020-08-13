@@ -5,7 +5,7 @@ const domStrings = {
   inputButton: ".add__btn",
   incomeContainer: ".income__list",
   expensesContainer: ".expenses__list",
-  itemDeleteButton: ".item__delete--btn",
+  container: ".container",
   budgetLabel: ".budget__value",
   budgetIncomeLabel: ".budget__income--value",
   budgetExpenseLabel: ".budget__expenses--value",
@@ -25,11 +25,11 @@ export function addListItem(obj, type) {
   if (type === "inc") {
     element = domStrings.incomeContainer;
     html =
-      '<div class="item clearfix" id="income-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">+ %value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
+      '<div class="item clearfix" id="inc-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">+ %value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
   } else {
     element = domStrings.expensesContainer;
     html =
-      '<div class="item clearfix" id="expense-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">- %value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
+      '<div class="item clearfix" id="exp-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">- %value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
   }
   newHTML = html.replace("%id%", obj.id);
   newHTML = newHTML.replace("%description%", obj.description);
@@ -37,6 +37,11 @@ export function addListItem(obj, type) {
   var wrapper = document.createElement("div");
   wrapper.innerHTML = newHTML;
   document.querySelector(element).insertAdjacentElement("beforeend", wrapper);
+}
+
+export function deleteListItem(selectorID) {
+  const deletedElement = document.getElementById(selectorID);
+  deletedElement.parentNode.removeChild(deletedElement);
 }
 
 export function clearFields() {

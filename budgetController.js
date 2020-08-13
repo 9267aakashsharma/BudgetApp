@@ -46,9 +46,12 @@ export function getBudget() {
   };
 }
 
-export function delItem(id, type) {
-  data.allItems[type].forEach((item, index) => {
-    if (item.id === id) item.splice(index, 1);
+export function delItem(idString) {
+  const newId = idString.split("-");
+  const id = parseFloat(newId[1]);
+  const type = newId[0];
+  data.allItems[type].forEach((item, index, allItems) => {
+    if (item.id === id) allItems.splice(index, 1);
   });
 }
 
