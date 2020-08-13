@@ -6,6 +6,10 @@ const domStrings = {
   incomeContainer: ".income__list",
   expensesContainer: ".expenses__list",
   itemDeleteButton: ".item__delete--btn",
+  budgetLabel: ".budget__value",
+  budgetIncomeLabel: ".budget__income--value",
+  budgetExpenseLabel: ".budget__expenses--value",
+  budgetPercentageLabel: ".budget__expenses--percentage",
 };
 
 export function getInput() {
@@ -44,6 +48,24 @@ export function clearFields() {
   fieldsArray.forEach((field) => {
     field.value = "";
   });
+}
+
+export function displayBudget(obj) {
+  document.querySelector(domStrings.budgetLabel).textContent = obj.budget;
+  document.querySelector(domStrings.budgetPercentageLabel).textContent =
+    obj.budgetPercentage;
+  document.querySelector(domStrings.budgetIncomeLabel).textContent =
+    obj.totalInc;
+  document.querySelector(domStrings.budgetExpenseLabel).textContent =
+    obj.totalExp;
+
+  if (obj.budgetPercentage > 0) {
+    document.querySelector(domStrings.budgetPercentageLabel).textContent =
+      obj.budgetPercentage;
+  } else {
+    document.querySelector(domStrings.budgetPercentageLabel).textContent =
+      "---";
+  }
 }
 
 export function getDOMStrings() {

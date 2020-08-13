@@ -17,7 +17,7 @@ function setUpEventListners() {
 function updateBudget() {
   budgetController.calcBudget();
   var budget = budgetController.getBudget();
-  console.log(budget);
+  uiController.displayBudget(budget);
 }
 
 function addItem() {
@@ -44,4 +44,9 @@ function delItem() {
   updateBudget();
 }
 
-setUpEventListners();
+function init() {
+  updateBudget();
+  setUpEventListners();
+}
+
+init();
