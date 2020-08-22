@@ -10,6 +10,7 @@ const domStrings = {
   budgetIncomeLabel: ".budget__income--value",
   budgetExpenseLabel: ".budget__expenses--value",
   budgetPercentageLabel: ".budget__expenses--percentage",
+  expensesPercentageLabel: ".item__percentage",
 };
 
 export function getInput() {
@@ -44,6 +45,36 @@ export function deleteListItem(selectorID) {
   deletedElement.parentNode.removeChild(deletedElement);
 }
 
+export function displayPercentages(expenseItems) {
+  const fields = document.querySelectorAll(domStrings.expensesPercentageLabel);
+  var fieldsArray = [...fields];
+
+  function getExpenseAtId(id) {
+    var perc;
+    for (let expense of expenseItems) {
+      console.log("expense-id: " + expense.id);
+      console.log("Node id: " + id);
+      if (expense.id === id) {
+        console.log("found");
+        perc = expense.percentage;
+        break;
+      } else {
+        perc = -1;
+      }
+    }
+    console.log("perc: " + perc);
+    return perc;
+  }
+
+  fieldsArray.forEach((field) => {
+    const elementNode = field.parentNode.parentNode.id;
+    const elementNodeArray = elementNode.split("-");
+    const elementNodeId = parseFloat(elementNodeArray[1]);
+    var updatedPercentage = getExpenseAtId(elementNodeId);
+    field.textContent = updatedPercentage + "%";
+  });
+}
+
 export function clearFields() {
   var fields;
   fields = document.querySelectorAll(
@@ -57,8 +88,6 @@ export function clearFields() {
 
 export function displayBudget(obj) {
   document.querySelector(domStrings.budgetLabel).textContent = obj.budget;
-  document.querySelector(domStrings.budgetPercentageLabel).textContent =
-    obj.budgetPercentage;
   document.querySelector(domStrings.budgetIncomeLabel).textContent =
     obj.totalInc;
   document.querySelector(domStrings.budgetExpenseLabel).textContent =
@@ -66,7 +95,7 @@ export function displayBudget(obj) {
 
   if (obj.budgetPercentage > 0) {
     document.querySelector(domStrings.budgetPercentageLabel).textContent =
-      obj.budgetPercentage;
+      obj.budgetPercentage + "%";
   } else {
     document.querySelector(domStrings.budgetPercentageLabel).textContent =
       "---";

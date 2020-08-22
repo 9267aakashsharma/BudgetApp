@@ -31,10 +31,25 @@ export function calcBudget() {
   calcTotal("inc");
   data.budget = data.totals.inc - data.totals.exp;
   if (data.totals.inc > 0)
-    data.budgetPercentage = Math.round(
-      (data.totals.exp / data.totals.inc) * 100
+    data.budgetPercentage = ((data.totals.exp / data.totals.inc) * 100).toFixed(
+      2
     );
   else data.budgetPercentage = -1;
+}
+
+export function calcPercentages() {
+  let copiedData = { ...data };
+  copiedData.allItems["exp"].forEach((item) => {
+    let percentage;
+    if (copiedData.totals.inc > 0) {
+      percentage = ((item.value / copiedData.totals.inc) * 100).toFixed(2);
+    } else {
+      percentage = ((item.value / copiedData.totals.exp) * 100).toFixed(2);
+    }
+    item.percentage = percentage;
+  });
+
+  return copiedData.allItems.exp;
 }
 
 export function getBudget() {

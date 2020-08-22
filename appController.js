@@ -18,6 +18,12 @@ function updateBudget() {
   uiController.displayBudget(budget);
 }
 
+function updateItemPercentages() {
+  var expenseItems = budgetController.calcPercentages();
+  uiController.displayPercentages(expenseItems);
+  budgetController.testing();
+}
+
 function addItem() {
   const input = uiController.getInput();
   if (
@@ -33,8 +39,8 @@ function addItem() {
     );
     uiController.addListItem(newItem, input.type);
     uiController.clearFields();
-    // budgetController.testing();
     updateBudget();
+    updateItemPercentages();
   }
 }
 
@@ -44,6 +50,7 @@ function delItem(event) {
     budgetController.delItem(itemID);
     uiController.deleteListItem(itemID);
     updateBudget();
+    updateItemPercentages();
   }
 }
 
